@@ -1,10 +1,6 @@
 package com.sametsafkan.mssbeerservice.web.controller;
 
 import com.sametsafkan.mssbeerservice.web.model.BeerDto;
-import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
-import com.sametsafkan.mssbeerservice.web.service.BeerService;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
