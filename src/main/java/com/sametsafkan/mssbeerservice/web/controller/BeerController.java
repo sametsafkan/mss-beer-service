@@ -25,7 +25,6 @@ public class BeerController {
     @PutMapping("/{beerId}")
     @ResponseStatus(NO_CONTENT)
     public void update(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto){
-
     }
 
     @DeleteMapping("/{beerId}")
