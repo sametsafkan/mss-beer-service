@@ -22,7 +22,7 @@ public class Beer {
     @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
     private String id;
     @Version
-    private String version;
+    private Long version;
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createDate;
