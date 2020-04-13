@@ -4,6 +4,7 @@ import com.sametsafkan.mssbeerservice.web.model.BeerDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.*;
@@ -18,13 +19,13 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody BeerDto beerDto){
+    public ResponseEntity save(@Valid @RequestBody BeerDto beerDto){
         return new ResponseEntity(CREATED);
     }
 
     @PutMapping("/{beerId}")
     @ResponseStatus(NO_CONTENT)
-    public void update(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto){
+    public void update(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto){
     }
 
     @DeleteMapping("/{beerId}")
