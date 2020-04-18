@@ -32,9 +32,9 @@ public class BeerDto {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = STRING)
     private OffsetDateTime lastModifiedDate;
     @NotBlank
-    private String beerName;
+    private String name;
     @NotNull
-    private BeerStyle beerStyle;
+    private BeerStyle style;
     @NotNull
     @Positive
     private Long upc;
