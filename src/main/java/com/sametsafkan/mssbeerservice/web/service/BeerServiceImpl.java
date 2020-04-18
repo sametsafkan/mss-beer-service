@@ -29,13 +29,14 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public void update(UUID beerId, BeerDto beerDto) {
+    public BeerDto update(UUID beerId, BeerDto beerDto) {
         Beer beer = beerRepository.findById(beerId).orElseThrow(RecordNotFoundException::new);
         beer.setName(beerDto.getName());
         beer.setStyle(beerDto.getStyle().name());
         beer.setUpc(beerDto.getUpc());
         beer.setPrice(beerDto.getPrice());
-        beerRepository.save(beerMapper.beerDtoToBeer(beerDto));
+        Beer savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beerDto));
+        return beerMapper.beerToBeerDto(savedBeer);
     }
 
     @Override
