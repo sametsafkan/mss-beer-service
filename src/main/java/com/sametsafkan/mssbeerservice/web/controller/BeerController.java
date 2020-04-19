@@ -43,7 +43,7 @@ public class BeerController {
         return beerPagedList;
     }
 
-    @GetMapping("/{beerId}/{showInventoryOnHand}")
+    @GetMapping("/{beerId}")
     @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
     public BeerDto findById(@PathVariable("beerId") UUID id,@RequestParam(value = "showInventoryOnHand", defaultValue = "false", required = false) Boolean showInventoryOnHand){
         if(showInventoryOnHand == null)
