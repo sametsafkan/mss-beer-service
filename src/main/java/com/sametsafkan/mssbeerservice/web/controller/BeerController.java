@@ -1,7 +1,7 @@
 package com.sametsafkan.mssbeerservice.web.controller;
 
 import com.sametsafkan.mssbeerservice.web.model.BeerDto;
-import com.sametsafkan.mssbeerservice.web.service.BeerService;
+import com.sametsafkan.mssbeerservice.service.BeerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

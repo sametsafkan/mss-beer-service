@@ -1,4 +1,4 @@
-package com.sametsafkan.mssbeerservice.web.domain;
+package com.sametsafkan.mssbeerservice.domain;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

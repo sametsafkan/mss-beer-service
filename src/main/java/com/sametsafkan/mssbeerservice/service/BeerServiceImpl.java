@@ -1,14 +1,13 @@
-package com.sametsafkan.mssbeerservice.web.service;
+package com.sametsafkan.mssbeerservice.service;
 
-import com.sametsafkan.mssbeerservice.web.domain.Beer;
-import com.sametsafkan.mssbeerservice.web.exception.RecordNotFoundException;
+import com.sametsafkan.mssbeerservice.domain.Beer;
+import com.sametsafkan.mssbeerservice.exception.RecordNotFoundException;
 import com.sametsafkan.mssbeerservice.web.mapper.BeerMapper;
 import com.sametsafkan.mssbeerservice.web.model.BeerDto;
-import com.sametsafkan.mssbeerservice.web.repository.BeerRepository;
+import com.sametsafkan.mssbeerservice.repository.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
