@@ -5,6 +5,7 @@ import com.sametsafkan.mssbeerservice.service.BeerService;
 import com.sametsafkan.mssbeerservice.web.model.BeerPagedList;
 import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,7 +28,8 @@ public class BeerController {
     private final BeerService beerService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BeerPagedList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+    @Cacheable(cacheNames = {"beerListCache"}, condition = "#showInventoryOnHand == false ")
+    public BeerPagedList listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                    @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                    @RequestParam(value = "beerName", required = false) String beerName,
                                                    @RequestParam(value = "beerStyle", required = false) BeerStyle beerStyle,
@@ -38,14 +40,15 @@ public class BeerController {
             pageSize = DEFAULT_PAGE_SIZE;
         BeerPagedList beerPagedList = beerService.listBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize),
                 showInventoryOnHand);
-        return new ResponseEntity<>(beerPagedList, OK);
+        return beerPagedList;
     }
 
     @GetMapping("/{beerId}/{showInventoryOnHand}")
-    public ResponseEntity<BeerDto> findById(@PathVariable("beerId") UUID id,@PathVariable(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
+    public BeerDto findById(@PathVariable("beerId") UUID id,@PathVariable(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
         if(showInventoryOnHand == null)
             showInventoryOnHand = false;
-        return new ResponseEntity<>(beerService.findById(id, showInventoryOnHand), OK);
+        return beerService.findById(id, showInventoryOnHand);
     }
 
     @PostMapping
