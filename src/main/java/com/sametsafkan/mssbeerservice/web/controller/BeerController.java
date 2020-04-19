@@ -45,10 +45,18 @@ public class BeerController {
 
     @GetMapping("/{beerId}/{showInventoryOnHand}")
     @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
-    public BeerDto findById(@PathVariable("beerId") UUID id,@PathVariable(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
+    public BeerDto findById(@PathVariable("beerId") UUID id,@RequestParam(value = "showInventoryOnHand", defaultValue = "false", required = false) Boolean showInventoryOnHand){
         if(showInventoryOnHand == null)
             showInventoryOnHand = false;
         return beerService.findById(id, showInventoryOnHand);
+    }
+
+    @GetMapping("/findByUpc/{upc}")
+    @Cacheable(cacheNames = "beerCache", key = "#upc", condition = "#showInventoryOnHand == false ")
+    public BeerDto findByUpc(@PathVariable("upc") String upc, @RequestParam(value = "showInventoryOnHand", defaultValue = "false",required = false) Boolean showInventoryOnHand){
+        if(showInventoryOnHand == null)
+            showInventoryOnHand = false;
+        return beerService.findByUpc(upc, showInventoryOnHand);
     }
 
     @PostMapping

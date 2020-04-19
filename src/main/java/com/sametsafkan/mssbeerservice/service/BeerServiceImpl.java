@@ -48,6 +48,14 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
+    public BeerDto findByUpc(String upc, Boolean showInventoryOnHand) {
+        Beer beer = beerRepository.findByUpc(upc);
+        return showInventoryOnHand.booleanValue() ?
+                beerMapper.beerToBeerDtoWithInventory(beer) :
+                beerMapper.beerToBeerDto(beer);
+    }
+
+    @Override
     public BeerDto save(BeerDto beerDto) {
         return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDto)));
     }
