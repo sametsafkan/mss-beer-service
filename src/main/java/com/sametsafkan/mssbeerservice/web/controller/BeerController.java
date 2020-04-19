@@ -2,8 +2,12 @@ package com.sametsafkan.mssbeerservice.web.controller;
 
 import com.sametsafkan.mssbeerservice.web.model.BeerDto;
 import com.sametsafkan.mssbeerservice.service.BeerService;
+import com.sametsafkan.mssbeerservice.web.model.BeerPagedList;
+import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +21,31 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class BeerController {
 
+    private final static int DEFAULT_PAGE_NUMBER = 0;
+    private final static int DEFAULT_PAGE_SIZE = 25;
+
     private final BeerService beerService;
 
-    @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDto> findById(@PathVariable("beerId") UUID id){
-        return new ResponseEntity<>(beerService.findById(id), OK);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BeerPagedList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+                                                   @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                   @RequestParam(value = "beerName", required = false) String beerName,
+                                                   @RequestParam(value = "beerStyle", required = false) BeerStyle beerStyle,
+                                                   @RequestParam(value = "showInventoryOnHand",required = false, defaultValue = "false") Boolean showInventoryOnHand){
+        if(pageNumber == null || pageNumber < 0)
+            pageNumber = DEFAULT_PAGE_NUMBER;
+        if(pageSize == null || pageSize < 0)
+            pageSize = DEFAULT_PAGE_SIZE;
+        BeerPagedList beerPagedList = beerService.listBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize),
+                showInventoryOnHand);
+        return new ResponseEntity<>(beerPagedList, OK);
+    }
+
+    @GetMapping("/{beerId}/{showInventoryOnHand}")
+    public ResponseEntity<BeerDto> findById(@PathVariable("beerId") UUID id,@PathVariable(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
+        if(showInventoryOnHand == null)
+            showInventoryOnHand = false;
+        return new ResponseEntity<>(beerService.findById(id, showInventoryOnHand), OK);
     }
 
     @PostMapping

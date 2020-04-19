@@ -5,10 +5,16 @@ import com.sametsafkan.mssbeerservice.exception.RecordNotFoundException;
 import com.sametsafkan.mssbeerservice.web.mapper.BeerMapper;
 import com.sametsafkan.mssbeerservice.web.model.BeerDto;
 import com.sametsafkan.mssbeerservice.repository.BeerRepository;
+import com.sametsafkan.mssbeerservice.web.model.BeerPagedList;
+import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +24,27 @@ public class BeerServiceImpl implements BeerService {
     private final BeerMapper beerMapper;
 
     @Override
-    public BeerDto findById(UUID id) {
-        return beerMapper.beerToBeerDto(beerRepository.findById(id).orElseThrow(RecordNotFoundException::new));
+    public BeerPagedList listBeers(String name, BeerStyle style, PageRequest pageRequest, Boolean showInventoryOnHand) {
+        Page<Beer> page;
+        if(!StringUtils.isEmpty(name) && !StringUtils.isEmpty(style))
+            page = beerRepository.findAllByNameAndStyle(name, style, pageRequest);
+        else if(!StringUtils.isEmpty(name) && StringUtils.isEmpty(style))
+            page = beerRepository.findAllByName(name, pageRequest);
+        else if(StringUtils.isEmpty(name) && !StringUtils.isEmpty(style))
+            page = beerRepository.findAllByStyle(style, pageRequest);
+        else
+            page = beerRepository.findAll(pageRequest);
+        return new BeerPagedList(page.getContent().stream()
+                                    .map(beer -> showInventoryOnHand.booleanValue() ? beerMapper.beerToBeerDtoWithInventory(beer) : beerMapper.beerToBeerDto(beer))
+                                    .collect(Collectors.toList()),
+                                PageRequest.of(page.getPageable().getPageNumber(), page.getPageable().getPageSize()),
+                                page.getTotalElements());
+    }
+
+    @Override
+    public BeerDto findById(UUID id, Boolean showInventoryOnHand) {
+        Beer beer = beerRepository.findById(id).orElseThrow(RecordNotFoundException::new);
+        return showInventoryOnHand.booleanValue()? beerMapper.beerToBeerDtoWithInventory(beer) : beerMapper.beerToBeerDto(beer);
     }
 
     @Override
