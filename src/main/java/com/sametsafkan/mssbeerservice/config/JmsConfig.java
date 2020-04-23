@@ -10,7 +10,7 @@ import static org.springframework.jms.support.converter.MessageType.TEXT;
 @Configuration
 public class JmsConfig {
 
-    public static final String MY_QUEUE = "my-hello-world";
+    public static final String BREWING_REQUEST_QUEUE = "brewing-request";
     public static final String SEND_AND_RECEIVE_QUEUE = "send-and-receive-queue";
 
     @Bean
