@@ -1,4 +1,4 @@
-package com.sametsafkan.mssbeerservice.service;
+package com.sametsafkan.mssbeerservice.service.brewing;
 
 import com.sametsafkan.mssbeerservice.config.JmsConfig;
 import com.sametsafkan.mssbeerservice.domain.Beer;
