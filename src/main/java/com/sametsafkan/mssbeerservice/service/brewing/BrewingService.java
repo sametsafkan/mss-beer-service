@@ -2,7 +2,7 @@ package com.sametsafkan.mssbeerservice.service.brewing;
 
 import com.sametsafkan.mssbeerservice.config.JmsConfig;
 import com.sametsafkan.mssbeerservice.domain.Beer;
-import com.sametsafkan.mssbeerservice.event.BrewBeerEvent;
+import com.sametsafkan.brewery.event.BrewBeerEvent;
 import com.sametsafkan.mssbeerservice.repository.BeerRepository;
 import com.sametsafkan.mssbeerservice.service.inventory.BeerInventory;
 import com.sametsafkan.mssbeerservice.web.mapper.BeerMapper;

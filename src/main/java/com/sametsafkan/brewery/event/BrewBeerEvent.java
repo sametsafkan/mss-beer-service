@@ -1,6 +1,6 @@
-package com.sametsafkan.mssbeerservice.event;
+package com.sametsafkan.brewery.event;
 
-import com.sametsafkan.mssbeerservice.web.model.BeerDto;
+import com.sametsafkan.brewery.model.BeerDto;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

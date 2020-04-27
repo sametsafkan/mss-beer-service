@@ -1,6 +1,6 @@
-package com.sametsafkan.mssbeerservice.event;
+package com.sametsafkan.brewery.event;
 
-import com.sametsafkan.mssbeerservice.web.model.BeerDto;
+import com.sametsafkan.brewery.model.BeerDto;
 
 public class NewInventoryEvent extends BeerEvent{
 

@@ -1,8 +1,8 @@
 package com.sametsafkan.mssbeerservice.service;
 
-import com.sametsafkan.mssbeerservice.web.model.BeerDto;
-import com.sametsafkan.mssbeerservice.web.model.BeerPagedList;
-import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
+import com.sametsafkan.brewery.model.BeerDto;
+import com.sametsafkan.brewery.model.BeerPagedList;
+import com.sametsafkan.brewery.model.BeerStyle;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.UUID;

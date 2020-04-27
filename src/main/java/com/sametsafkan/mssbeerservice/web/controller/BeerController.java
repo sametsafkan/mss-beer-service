@@ -1,9 +1,9 @@
 package com.sametsafkan.mssbeerservice.web.controller;
 
-import com.sametsafkan.mssbeerservice.web.model.BeerDto;
+import com.sametsafkan.brewery.model.BeerDto;
 import com.sametsafkan.mssbeerservice.service.BeerService;
-import com.sametsafkan.mssbeerservice.web.model.BeerPagedList;
-import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
+import com.sametsafkan.brewery.model.BeerPagedList;
+import com.sametsafkan.brewery.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;

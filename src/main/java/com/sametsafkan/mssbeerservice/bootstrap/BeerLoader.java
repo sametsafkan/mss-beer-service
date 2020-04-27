@@ -1,7 +1,7 @@
 package com.sametsafkan.mssbeerservice.bootstrap;
 
 import com.sametsafkan.mssbeerservice.domain.Beer;
-import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
+import com.sametsafkan.brewery.model.BeerStyle;
 import com.sametsafkan.mssbeerservice.repository.BeerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -1,8 +1,8 @@
 package com.sametsafkan.mssbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sametsafkan.mssbeerservice.web.model.BeerDto;
-import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
+import com.sametsafkan.brewery.model.BeerDto;
+import com.sametsafkan.brewery.model.BeerStyle;
 import com.sametsafkan.mssbeerservice.service.BeerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

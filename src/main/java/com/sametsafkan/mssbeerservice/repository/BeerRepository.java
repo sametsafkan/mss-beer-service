@@ -1,11 +1,10 @@
 package com.sametsafkan.mssbeerservice.repository;
 
 import com.sametsafkan.mssbeerservice.domain.Beer;
-import com.sametsafkan.mssbeerservice.web.model.BeerStyle;
+import com.sametsafkan.brewery.model.BeerStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.UUID;
 

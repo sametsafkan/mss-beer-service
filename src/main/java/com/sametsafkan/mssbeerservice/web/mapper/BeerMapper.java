@@ -1,7 +1,7 @@
 package com.sametsafkan.mssbeerservice.web.mapper;
 
 import com.sametsafkan.mssbeerservice.domain.Beer;
-import com.sametsafkan.mssbeerservice.web.model.BeerDto;
+import com.sametsafkan.brewery.model.BeerDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 
